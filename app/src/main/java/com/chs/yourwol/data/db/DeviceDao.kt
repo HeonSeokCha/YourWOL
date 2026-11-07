@@ -17,7 +17,7 @@ interface DeviceDao {
     @Upsert
     suspend fun upsert(entity: DeviceEntity): Long
 
-    @Delete
+    @Query("DELETE FROM devices WHERE id = :id")
     suspend fun delete(id: Long)
 
     @Query("UPDATE devices SET hostKeyFingerprint = :fingerprint WHERE id = :id")
