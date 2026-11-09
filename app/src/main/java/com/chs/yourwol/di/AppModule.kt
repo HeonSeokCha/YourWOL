@@ -25,7 +25,6 @@ class AppModule {
     fun provideDao(db: AppDatabase): DeviceDao = db.deviceDao()
 }
 
-
 @KoinApplication(
     modules = [AppModule::class]
 )

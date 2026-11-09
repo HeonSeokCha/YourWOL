@@ -17,5 +17,3 @@ interface DeviceRepository {
 
     suspend fun resetHostKey(id: Long)
 }
-
-

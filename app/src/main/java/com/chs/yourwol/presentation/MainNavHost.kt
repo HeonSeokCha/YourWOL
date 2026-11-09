@@ -6,15 +6,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 
-
-@Serializable
-data object DeviceListRoute
-
-@Serializable
-data class DeviceEditRoute(val id: Long = NEW_DEVICE) {
-    companion object { const val NEW_DEVICE = -1L }
-}
-
 @Composable
 fun MainNavHost() {
     val navController = rememberNavController()
@@ -22,6 +13,7 @@ fun MainNavHost() {
         composable<DeviceListRoute> {
 
         }
+
         composable<DeviceEditRoute> {
         }
     }
