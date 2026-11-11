@@ -2,6 +2,7 @@ package com.chs.yourwol.presentation.device_edit
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chs.yourwol.domain.DeviceRepository
 import com.chs.yourwol.domain.Validators
 import com.chs.yourwol.domain.model.RemoteDeviceInfo
 import com.chs.yourwol.presentation.DeviceEditRoute
@@ -10,12 +11,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.InjectedParam
 import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
-class DeviceEditViewModel : ViewModel() {
-    private val deviceId = savedStateHandle.toRoute<DeviceEditRoute>().id
+class DeviceEditViewModel(
+    @InjectedParam private val deviceId: Long,
+    private val repository: DeviceRepository,
+) : ViewModel() {
     private var original: RemoteDeviceInfo? = null
 
     private val _uiState = MutableStateFlow(DeviceEditUiState(isNew = deviceId == DeviceEditRoute.NEW_DEVICE))
@@ -31,10 +36,14 @@ class DeviceEditViewModel : ViewModel() {
                 _uiState.update {
                     it.copy(
                         form = DeviceForm(
-                            name = d.name, mac = d.macAddress, ip = d.ipAddress,
+                            name = d.name,
+                            mac = d.macAddress,
+                            ip = d.ipAddress,
                             broadcast = d.broadcastAddress.orEmpty(),
-                            wolPort = d.wolPort.toString(), sshPort = d.sshPort.toString(),
-                            sshUser = d.sshUser, osType = d.osType, hasSavedPassword = d.hasPassword,
+                            wolPort = d.wolPort.toString(),
+                            sshPort = d.sshPort.toString(),
+                            sshUser = d.sshUser,
+                            hasSavedPassword = d.hasPassword
                         )
                     )
                 }
@@ -55,7 +64,7 @@ class DeviceEditViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.update { it.copy(saving = true) }
             repository.saveDevice(
-                device = Device(
+                device = RemoteDeviceInfo(
                     id = original?.id ?: 0L,
                     name = form.name,
                     macAddress = form.mac,
@@ -63,8 +72,7 @@ class DeviceEditViewModel : ViewModel() {
                     broadcastAddress = form.broadcast.ifBlank { null },
                     wolPort = form.wolPort.toInt(),
                     sshPort = form.sshPort.toInt(),
-                    sshUser = form.sshUser,
-                    osType = form.osType,
+                    sshUser = form.sshUser
                 ),
                 password = form.password.ifEmpty { null },
             )
@@ -82,5 +90,4 @@ class DeviceEditViewModel : ViewModel() {
         if (!Validators.isValidPort(f.sshPort)) put(Field.SSH_PORT, "1~65535")
         if (f.sshUser.isBlank()) put(Field.SSH_USER, "SSH 사용자명을 입력하세요")
     }
-
 }
