@@ -1,8 +1,8 @@
 package com.chs.yourwol.data
 
 import com.chs.yourwol.data.db.DeviceDao
-import com.chs.yourwol.domain.model.PowerState
-import com.chs.yourwol.domain.model.RemoteDeviceInfo
+import com.chs.yourwol.domain.PowerState
+import com.chs.yourwol.domain.RemoteDeviceInfo
 import com.chs.yourwol.data.db.DeviceEntity
 import com.chs.yourwol.domain.DeviceRepository
 import com.chs.yourwol.domain.PowerOffResult

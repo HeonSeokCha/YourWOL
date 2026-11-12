@@ -31,7 +31,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.chs.yourwol.domain.model.OsType
+import com.chs.yourwol.domain.OsType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

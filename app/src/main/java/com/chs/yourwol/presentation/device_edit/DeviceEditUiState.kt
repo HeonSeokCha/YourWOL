@@ -1,6 +1,6 @@
 package com.chs.yourwol.presentation.device_edit
 
-import com.chs.yourwol.domain.model.OsType
+import com.chs.yourwol.domain.OsType
 
 data class DeviceEditUiState(
     val isNew: Boolean = true,

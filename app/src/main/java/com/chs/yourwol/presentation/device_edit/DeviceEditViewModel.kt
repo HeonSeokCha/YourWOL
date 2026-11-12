@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.chs.yourwol.domain.DeviceRepository
 import com.chs.yourwol.domain.Validators
-import com.chs.yourwol.domain.model.RemoteDeviceInfo
+import com.chs.yourwol.domain.RemoteDeviceInfo
 import com.chs.yourwol.presentation.DeviceEditRoute
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

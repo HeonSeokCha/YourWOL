@@ -1,4 +1,4 @@
-package com.chs.yourwol.domain.model
+package com.chs.yourwol.domain
 
 data class RemoteDeviceInfo(
     val id: Long = 0,

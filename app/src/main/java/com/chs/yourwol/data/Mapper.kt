@@ -1,7 +1,7 @@
 package com.chs.yourwol.data
 
 import com.chs.yourwol.data.db.DeviceEntity
-import com.chs.yourwol.domain.model.RemoteDeviceInfo
+import com.chs.yourwol.domain.RemoteDeviceInfo
 
 fun DeviceEntity.toDomain() = RemoteDeviceInfo(
     id = id,

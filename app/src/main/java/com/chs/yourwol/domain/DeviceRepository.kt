@@ -1,7 +1,5 @@
 package com.chs.yourwol.domain
 
-import com.chs.yourwol.domain.model.PowerState
-import com.chs.yourwol.domain.model.RemoteDeviceInfo
 import kotlinx.coroutines.flow.Flow
 
 interface DeviceRepository {
