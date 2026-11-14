@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.chs.yourwol.domain.DeviceRepository
 import com.chs.yourwol.domain.Validators
 import com.chs.yourwol.domain.RemoteDeviceInfo
-import com.chs.yourwol.presentation.DeviceEditRoute
+import com.chs.yourwol.presentation.Screens
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +23,16 @@ class DeviceEditViewModel(
 ) : ViewModel() {
     private var original: RemoteDeviceInfo? = null
 
-    private val _uiState = MutableStateFlow(DeviceEditUiState(isNew = deviceId == DeviceEditRoute.NEW_DEVICE))
+    private val _uiState = MutableStateFlow(
+        DeviceEditUiState(isNew = deviceId == Screens.DeviceEditRoute.NEW_DEVICE)
+    )
     val uiState: StateFlow<DeviceEditUiState> = _uiState.asStateFlow()
 
     private val _saved = Channel<Unit>(Channel.CONFLATED)
     val saved = _saved.receiveAsFlow()
 
     init {
-        if (deviceId != DeviceEditRoute.NEW_DEVICE) viewModelScope.launch {
+        if (deviceId != Screens.DeviceEditRoute.NEW_DEVICE) viewModelScope.launch {
             repository.getDevice(deviceId)?.let { d ->
                 original = d
                 _uiState.update {
