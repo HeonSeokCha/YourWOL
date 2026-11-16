@@ -1,5 +1,6 @@
 package com.chs.yourwol.data.db
 
+import androidx.room3.ColumnInfo
 import androidx.room3.Entity
 import androidx.room3.PrimaryKey
 
@@ -16,4 +17,5 @@ data class DeviceEntity(
     val sshUser: String,
     val encryptedPassword: ByteArray?,
     val hostKeyFingerprint: String?,
+    val osType: String
 )

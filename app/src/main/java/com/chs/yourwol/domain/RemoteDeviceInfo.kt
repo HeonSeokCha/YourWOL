@@ -11,6 +11,7 @@ data class RemoteDeviceInfo(
     val sshUser: String,
     val hasPassword: Boolean = false,
     val hostKeyFingerprint: String? = null,
+    val osType: OsType
 )
 
 enum class OsType(

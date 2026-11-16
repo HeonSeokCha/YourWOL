@@ -45,7 +45,8 @@ class DeviceEditViewModel(
                             wolPort = d.wolPort.toString(),
                             sshPort = d.sshPort.toString(),
                             sshUser = d.sshUser,
-                            hasSavedPassword = d.hasPassword
+                            hasSavedPassword = d.hasPassword,
+                            osType = d.osType
                         )
                     )
                 }
@@ -74,7 +75,8 @@ class DeviceEditViewModel(
                     broadcastAddress = form.broadcast.ifBlank { null },
                     wolPort = form.wolPort.toInt(),
                     sshPort = form.sshPort.toInt(),
-                    sshUser = form.sshUser
+                    sshUser = form.sshUser,
+                    osType = form.osType
                 ),
                 password = form.password.ifEmpty { null },
             )

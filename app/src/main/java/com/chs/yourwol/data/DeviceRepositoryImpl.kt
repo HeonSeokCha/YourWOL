@@ -53,6 +53,7 @@ class DeviceRepositoryImpl(
             sshUser = device.sshUser.trim(),
             encryptedPassword = encrypted,
             hostKeyFingerprint = fingerprint,
+            osType = device.osType.name
         )
         val rowId = dao.upsert(entity)
         return if (device.id != 0L) device.id else rowId
@@ -76,14 +77,14 @@ class DeviceRepositoryImpl(
         } catch (e: Exception) {
             return PowerOffResult.NoCredential
         }
-//        val command = if (reboot) device.osType.rebootCommand else device.osType.shutdownCommand
+        val command = if (reboot) device.osType.rebootCommand else device.osType.shutdownCommand
 
         val r = ssh.execute(
             host = device.ipAddress,
             port = device.sshPort,
             user = device.sshUser,
             password = password,
-            command = "",
+            command = command,
             knownFingerprint = entity.hostKeyFingerprint,
         )
 

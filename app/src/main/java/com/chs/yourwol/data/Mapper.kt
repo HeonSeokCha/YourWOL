@@ -1,6 +1,7 @@
 package com.chs.yourwol.data
 
 import com.chs.yourwol.data.db.DeviceEntity
+import com.chs.yourwol.domain.OsType
 import com.chs.yourwol.domain.RemoteDeviceInfo
 
 fun DeviceEntity.toDomain() = RemoteDeviceInfo(
@@ -14,4 +15,5 @@ fun DeviceEntity.toDomain() = RemoteDeviceInfo(
     sshUser = sshUser,
     hasPassword = encryptedPassword != null,
     hostKeyFingerprint = hostKeyFingerprint,
+    osType = OsType.entries.find { it.name == osType } ?: OsType.WINDOWS,
 )
